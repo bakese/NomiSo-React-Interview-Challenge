@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { getDummyData } from './helpers/dummyGetDataAPI';
 
 // https://media.giphy.com/media/IxaiATywlvNlzjU8Ta/giphy.gif
@@ -20,63 +20,7 @@ import { getDummyData } from './helpers/dummyGetDataAPI';
 // 4.) EXTRA - IF TIME ALLOWS: Add a button next to each name to delete your list of names in App.tsx. This should NOT mutate the array of names in dummyDataBase.tsx, only the state in your component.
 
 const App = () => {
-  const [names, setNames] = useState([]);
-  const [filteredNames, setFilteredName] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getDummyData();
-        setNames(data);
-        setFilteredName(data);
-      } catch (err) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const tempNames = [];
-    names.map((name) => {
-      if (
-        name.toLowerCase().slice(0, searchTerm.length) ===
-        searchTerm.toLowerCase()
-      ) {
-        tempNames.push(name);
-      }
-    });
-    setFilteredName(tempNames);
-  }, [searchTerm]);
-
-  if (isError) {
-    return <div>Error Fetching Data: Please Refresh the Page.</div>;
-  }
-
-  return (
-    <div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <input
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          ></input>
-          <div>
-            {filteredNames.map((name) => {
-              return <div>{name}</div>;
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default App;
